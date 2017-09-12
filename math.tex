@@ -1,4 +1,13 @@
 \section{Math}
+\subsection{Hill climbing}
+Hill climbing is an useful function to get the maximum value if you don't know what to do!
+just make a function and follow the instruction below:
+\lstinputlisting{"./math/hill_climbing.cpp"}
+
+\subsection{Linear Seq}
+杜教的递推板子，目测大概需要暴力递推阵的大小的两倍。
+\lstinputlisting{"./math/linear_seq.cpp"}
+
 \subsection{FFT}
 \subsubsection{Bit operation}
 $tf(X1,X2) = (tf(X1) - tf(X2), tf(X1) + tf(X2))$
@@ -17,13 +26,43 @@ $tf(X1,X2) = (tf(X1) - tf(X2), tf(X1) + tf(X2))$
 
 \subsection{Ex-GCD}
 \lstinputlisting{"./math/exGCD.cpp"}
+\subsection{M\"obius}
+两个公式:
+\begin{equation}
+F(n) = \sum_{d|n}{} f(d) \Longrightarrow f(n) = \sum_{d|n}{} \mu (d) F(\frac{n}{d}) \tag{1}
+\end{equation}
+\begin{equation}
+F(n) = \sum_{n|d}{} f(d) \Longrightarrow f(n) = \sum_{n | d} \mu (\frac{d}{n})F(d) \tag{2}
+\end{equation}
+\begin{equation}
+\mu(n) = 
+\begin{cases}
+1 & n = 1\\
+(-1)^k & n = p_1 p_2 ... p_k\\
+0 & \text{其余情况}
+\end{cases}\notag
+\end{equation}
+\subsubsection{M\"obius用于容斥}
+容斥原理:在集合S中至少具有 $P_1 P_2 ... P_m$中一个元素的个数是：
+\begin{equation}
+|S_1 \cup S_2 \cup S_3 ... \cup S_n| = \sum |S_i| - \sum |S_i \cup S_j| + ... +  \sum (-1) ^ {m + 1} |S_1\cup S_2 ... \cup S_m| \notag
+\end{equation}
 
+常用转化式:
+\begin{equation}
+\sum_{i=1}^{n} \lfloor{\frac{n}{i}}\rfloor = \sum_{i=1}^{n} d(i), d(n)\text{是}n\text{的正因子数目(埃筛)}\notag
+\end{equation}
+
+\begin{equation}
+[x=1] = \sum_{d|x} \mu (d)\notag
+\end{equation}
+\lstinputlisting{"./math/mobius.cpp"}
 \subsection{Prime}
 \subsubsection{Get primes}
 \lstinputlisting{"./math/prime.cpp"}
 \subsubsection{Get factors}
 \lstinputlisting{"./math/factor.cpp"}
-\subsection{区间筛}
+\subsubsection{区间筛}
 \lstinputlisting{"./math/interval_primes.cpp"}
 \subsection{Simpson}
 \lstinputlisting{"./math/simpson.cpp"}
@@ -47,7 +86,7 @@ $tf(X1,X2) = (tf(X1) - tf(X2), tf(X1) + tf(X2))$
 \subsection{Linear programming}
 \lstinputlisting{"./math/lp.cpp"}
 
-\subsection{Factorization prime number p into $x^2+y^2$}
+\subsection{Factorization prime number p into $x^2+y^2$ }
 \lstinputlisting{"./math/fermat.cpp"}
 
 \subsection{Partition ways of an integer}
@@ -72,7 +111,7 @@ $O(n\sqrt{n})$
 			\item[如果$n$为奇数：] $C(f)=\frac{n}{2}+1$\\
 		\end{description}
 	\end{description}
-
+%\subsection{}
 	\subsection{拉格朗日插值法}
 	已知$y=a_0+a_1x+a_2x^2+\cdots +a_{n-1}x^{n-1}$曲线上的$n$个点$(x_1,y_1),(x_2,y_2),(x_3,y_3)\cdots (x_n,y_n)$\\
 	用拉格朗日插值法可以不求系数可知任意$x$对应的$y$值。\\
@@ -105,8 +144,13 @@ $O(n\sqrt{n})$
 	$\sum{k\times (k+1)} = \frac{n\times (n+1)\times (n+2)}{3}$\\
 	$\sum{k\times (k+1)\times (k+2)} = \frac{n\times (n+1)\times (n+2)\times (n+3)}{4}$\\
 	$\sum{k\times (k+1)\times (k+2)\times (k+3)} = \frac{n\times (n+1)\times (n+2)\times (n+3)\times (n+4)}{5}$\\
-	
+	$\sum{i\times \binom{n}{i}} = n \times 2^{n - 1}$（子集长度和)\\
+	$\sum_{i=1}^{n} \lfloor{\frac{n}{i}}\rfloor = \sum_{i=1}^{n} d(i), d(n)\text{是}n\text{的正因子数目(埃筛)}$\\
+	$[x=1] = \sum_{d|x} \mu (d)$
 	\subsection{几何公式}
+	n-Polygon: $\frac{n}{2} * R ^ 2 * sin( \frac{2 \pi }{n} )$\\
+	已知任意三点求边数最少的（同时也是面积最小）正多边形：由于$A=\frac{A'}{2}$ 所以有$A=k \frac{\alpha}{2}$ ，结论: $\alpha = 2gcd(A,B,C)$ 其中A, B, C为三角形内角\\
+	\includegraphics[scale=0.5]{./geometry/npolygon.jpg} \includegraphics[scale=0.6]{./geometry/npolygon_2.png}\\
 	球扇形：\\
 	全面积：$T = \pi r(2h+r_0)$，$h$为球冠高，$r_0$为球冠底面半径\\
 	体积：$V = \frac{2\pi r^{2}h}{3}$\\

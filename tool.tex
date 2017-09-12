@@ -3,6 +3,11 @@
 \lstinputlisting{"./tool/date.cpp"}
 \subsection{Bit compression}
 \lstinputlisting{"./tool/bitCompression.cpp"}
+\subsection{Random}
+
+之所以增加这一部分是由于rand()和random\_device在Win + MinGw的环境下并不是一个安全的随机（返回的是固定的一个数列）\\ 因此用以下代码将会使得你的随机代码更加靠谱。\\
+
+\lstinputlisting{"./tool/random.cpp"}
 \subsection{Hash map}
 \lstinputlisting{"./tool/hashMap.cpp"}
 \subsection{120 bit integer}
@@ -22,8 +27,9 @@ gnome-terminal -t $TITLE -x
 		\toprule
 		功能 & 示例 & 位运算\\
 		\midrule
+		返回lsb之后的0的个数 & $(1100010)\rightarrow 1D$ & \_\_builtin\_ctz(x)[x==0时UB]\\
 		统计二进制$1$的个数  & $(1100110\rightarrow 4D)$        &\_\_builtin\_popcount(x)\\
-		取最后一个1的pos(ffs) & $(1000010\rightarrow 2D)$       &\_\_builtin\_ffs(x)\\
+		取最后一个1的pos+1(ffs) & $(1000010\rightarrow 2D)$       &\_\_builtin\_ffs(x)\\
 		取最后一个1的mask(lsb)   & $(1000010\rightarrow 10)$      & (x \& (-x))\\
 		去掉最后一位		  & $(101101\rightarrow 10110)$		   & x shr 1\\
 		在最后加一个$0$		 & $(101101\rightarrow1011010)$		 & x shl 1\\
